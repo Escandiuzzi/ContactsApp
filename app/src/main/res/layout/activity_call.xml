@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CallActivity">
+
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/pvCallPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@color/black"
+        android:minHeight="250dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="90dp"
+        android:minWidth="200dp"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Name"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
+        android:textSize="15sp"
+        android:layout_gravity="left"/>
+
+    <TextView
+        android:id="@+id/tvCallName"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Luiz Felipe Escandiuzzi"
+        android:layout_marginTop="10dp"
+        android:textSize="23sp"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Phone"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:textSize="15sp"
+        android:layout_gravity="left"/>
+
+    <TextView
+        android:id="@+id/tvCallPhone"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="81222451"
+        android:layout_marginTop="5dp"
+        android:textSize="23sp"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Cellphone"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:textSize="15sp"
+        android:layout_gravity="left"/>
+
+    <TextView
+        android:id="@+id/tvCallCellphone"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="+55 54 981123204"
+        android:layout_marginTop="5dp"
+        android:textSize="23sp"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Call"
+        android:layout_gravity="center"/>
+
+
+
+</LinearLayout>
