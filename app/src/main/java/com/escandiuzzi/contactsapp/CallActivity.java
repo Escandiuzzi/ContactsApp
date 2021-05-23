@@ -22,7 +22,8 @@ public class CallActivity extends AppCompatActivity {
 
     private final static int REQUEST_CODE = 1;
 
-    Button btnCall;
+    Button btnCallPhone;
+    Button btnCallCellphone;
 
     TextView tvName;
     TextView tvPhone;
@@ -35,7 +36,8 @@ public class CallActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
 
-        btnCall = (Button) findViewById(R.id.btnCall);
+        btnCallPhone = (Button) findViewById(R.id.btnCallPhone);
+        btnCallCellphone = (Button) findViewById(R.id.btnCallCellPhone);
 
         tvName = (TextView) findViewById(R.id.tvCallName);
         tvPhone = (TextView) findViewById(R.id.tvCallPhone);
@@ -57,24 +59,40 @@ public class CallActivity extends AppCompatActivity {
         tvCellphone.setText(contact.getCellphone());
         pvImage.setImageBitmap(contact.getUserImage());
 
-
-        btnCall.setOnClickListener(new View.OnClickListener() {
+        btnCallPhone.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                if (view.getId() == R.id.btnCall &&
-                        ActivityCompat.checkSelfPermission(CallActivity.this, Manifest.permission.CALL_PHONE)
-                                != PackageManager.PERMISSION_GRANTED)
-                {
-                    Log.d("STATE", "Call Button DOES NOT WORK");
-                    ActivityCompat.requestPermissions(CallActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CODE);
-                    return;
-                }
-                Log.d("STATE", "Call Button DOES WORK");
-                Intent phoneIntent = new Intent(Intent.ACTION_CALL);
-                phoneIntent.setData(Uri.parse("tel:" + contact.getCellphone()));
-                startActivity(phoneIntent);
-            }
+            public void onClick(View view) { call(view, R.id.btnCallPhone, contact.getPhone()); }
         });
+
+        btnCallCellphone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { call(view, R.id.btnCallCellPhone, contact.getCellphone()); }
+        });
+    }
+
+    private void call(View view, int id, String number) {
+
+        if(!checkCallPermissions(view, id))
+            return;
+
+        makeCall(number);
+    }
+
+    private boolean checkCallPermissions(View view, int id) {
+        if (view.getId() == id &&
+                ActivityCompat.checkSelfPermission(CallActivity.this, Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED) {
+            Log.d("STATE", "Call Button DOES NOT WORK");
+            ActivityCompat.requestPermissions(CallActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CODE);
+            return false;
+        }
+
+        return true;
+    }
+
+    private void makeCall(String number) {
+        Intent phoneIntent = new Intent(Intent.ACTION_CALL);
+        phoneIntent.setData(Uri.parse("tel:" + number));
+        startActivity(phoneIntent);
     }
 }

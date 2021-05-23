@@ -75,13 +75,28 @@
         android:layout_gravity="center"
         android:textStyle="bold"/>
 
-    <Button
-        android:id="@+id/btnCall"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Call"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/btnCallPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call Phone"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/btnCallCellPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Call Cellphone"/>
+
+    </LinearLayout>
+
 
 
 

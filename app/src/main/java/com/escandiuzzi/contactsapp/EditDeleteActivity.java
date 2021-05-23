@@ -72,7 +72,7 @@ public class EditDeleteActivity extends AppCompatActivity {
         String name =  getIntent().getStringExtra("Name");
         String phone =  getIntent().getStringExtra("Phone");
         String cellphone =  getIntent().getStringExtra("Cellphone");
-        Bitmap photo = BitmapHelper.getImage(getIntent().getByteArrayExtra("Photo"));
+        photo = BitmapHelper.getImage(getIntent().getByteArrayExtra("Photo"));
 
         Contact contact = new Contact(id, name, phone, cellphone, photo);
 
