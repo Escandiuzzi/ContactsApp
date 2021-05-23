@@ -36,6 +36,8 @@ import java.util.Date;
 
 public class CreateActivity extends AppCompatActivity {
 
+    private static final String COUNTRY_ISO = "BR";
+
     // Storage Permissions
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -91,8 +93,8 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String formattedPhone = PhoneNumberUtils.formatNumber(tiPhone.getText().toString(), "BR");
-                String formattedCellphone = PhoneNumberUtils.formatNumber(tiCellphone.getText().toString(), "BR");
+                String formattedPhone = PhoneNumberUtils.formatNumber(tiPhone.getText().toString(), COUNTRY_ISO);
+                String formattedCellphone = PhoneNumberUtils.formatNumber(tiCellphone.getText().toString(), COUNTRY_ISO);
 
                 Contact contact = new Contact();
 

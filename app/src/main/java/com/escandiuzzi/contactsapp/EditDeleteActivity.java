@@ -35,6 +35,8 @@ import java.util.Date;
 
 public class EditDeleteActivity extends AppCompatActivity {
 
+    private static final String COUNTRY_ISO = "BR";
+
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int GALLERY_INTENT = 2;
 
@@ -89,8 +91,8 @@ public class EditDeleteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String formattedPhone = PhoneNumberUtils.formatNumber(tiPhone.getText().toString(), "BR");
-                String formattedCellphone = PhoneNumberUtils.formatNumber(tiCellphone.getText().toString(), "BR");
+                String formattedPhone = PhoneNumberUtils.formatNumber(tiPhone.getText().toString(), COUNTRY_ISO);
+                String formattedCellphone = PhoneNumberUtils.formatNumber(tiCellphone.getText().toString(), COUNTRY_ISO);
 
                 contact.setName(tiName.getText().toString());
                 contact.setPhone(formattedPhone);
