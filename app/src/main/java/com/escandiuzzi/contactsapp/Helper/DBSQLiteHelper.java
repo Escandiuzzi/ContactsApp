@@ -156,8 +156,4 @@ public class DBSQLiteHelper extends SQLiteOpenHelper {
 
         return contact;
     }
-
-
-
-
 }

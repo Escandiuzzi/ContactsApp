@@ -55,14 +55,10 @@ public class MainActivity extends AppCompatActivity {
 
         dbsqLiteHelper = new DBSQLiteHelper(this);
 
-        ///Clear DB
-        //dbsqLiteHelper.onUpgrade(dbsqLiteHelper.getReadableDatabase(), 0,1);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
-
 
     @Override
     protected void onStart() {
@@ -141,5 +137,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }).create().show();
     }
-
 }

@@ -1,11 +1,8 @@
 package com.escandiuzzi.contactsapp;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.Activity;
@@ -14,24 +11,20 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.telephony.PhoneNumberUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.escandiuzzi.contactsapp.Helper.DBSQLiteHelper;
-import com.escandiuzzi.contactsapp.Helper.StringFormatter;
 import com.escandiuzzi.contactsapp.Model.Contact;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -56,9 +49,9 @@ public class CreateActivity extends AppCompatActivity {
     Button btnInsert;
     Button btnGallery;
 
-    TextView tvName;
-    TextView tvPhone;
-    TextView tvCellphone;
+    TextInputEditText tiName;
+    TextInputEditText tiPhone;
+    TextInputEditText tiCellphone;
 
     PhotoView pvImage;
 
@@ -77,9 +70,9 @@ public class CreateActivity extends AppCompatActivity {
         btnTakePhoto = (Button) findViewById(R.id.btnPhoto);
         btnGallery = (Button) findViewById(R.id.btnGallery);
 
-        tvName = (TextView) findViewById(R.id.tiName);
-        tvPhone = (TextView) findViewById(R.id.tiPhone);
-        tvCellphone = (TextView) findViewById(R.id.tiCellphone);
+        tiName = (TextInputEditText) findViewById(R.id.tiName);
+        tiPhone = (TextInputEditText) findViewById(R.id.tiPhone);
+        tiCellphone = (TextInputEditText) findViewById(R.id.tiCellphone);
 
         pvImage = (PhotoView) findViewById(R.id.pvProfilePic);
 
@@ -98,10 +91,14 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                String formattedPhone = PhoneNumberUtils.formatNumber(tiPhone.getText().toString(), "BR");
+                String formattedCellphone = PhoneNumberUtils.formatNumber(tiCellphone.getText().toString(), "BR");
+
                 Contact contact = new Contact();
-                contact.setName(tvName.getText().toString());
-                contact.setPhone(tvPhone.getText().toString());
-                contact.setCellphone(tvCellphone.getText().toString());
+
+                contact.setName(tiName.getText().toString());
+                contact.setPhone(formattedPhone);
+                contact.setCellphone(formattedCellphone);
                 contact.setUserImage(photo);
 
                 dbsqLiteHelper.addContact(contact);
@@ -232,4 +229,5 @@ public class CreateActivity extends AppCompatActivity {
                 });
         alertDialog.show();
     }
+
 }

@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.telephony.PhoneNumberUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.escandiuzzi.contactsapp.Helper.BitmapHelper;
 import com.escandiuzzi.contactsapp.Helper.DBSQLiteHelper;
 import com.escandiuzzi.contactsapp.Model.Contact;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -41,9 +43,9 @@ public class EditDeleteActivity extends AppCompatActivity {
     Button btnDelete;
     Button btnEdit;
 
-    TextView tvName;
-    TextView tvPhone;
-    TextView tvCellphone;
+    TextInputEditText tiName;
+    TextInputEditText tiPhone;
+    TextInputEditText tiCellphone;
 
     PhotoView pvImage;
 
@@ -61,9 +63,9 @@ public class EditDeleteActivity extends AppCompatActivity {
         btnTakePhoto = (Button) findViewById(R.id.btnPhotoEdit);
         btnGallery = (Button) findViewById(R.id.btnGalleryEdit);
 
-        tvName = (TextView) findViewById(R.id.tiNameEdit);
-        tvPhone = (TextView) findViewById(R.id.tiPhoneEdit);
-        tvCellphone = (TextView) findViewById(R.id.tiCellphoneEdit);
+        tiName = (TextInputEditText) findViewById(R.id.tiNameEdit);
+        tiPhone = (TextInputEditText) findViewById(R.id.tiPhoneEdit);
+        tiCellphone = (TextInputEditText) findViewById(R.id.tiCellphoneEdit);
 
         pvImage = (PhotoView) findViewById(R.id.pvProfilePicEdit);
 
@@ -76,9 +78,9 @@ public class EditDeleteActivity extends AppCompatActivity {
 
         Contact contact = new Contact(id, name, phone, cellphone, photo);
 
-        tvName.setText(contact.getName());
-        tvPhone.setText(contact.getPhone());
-        tvCellphone.setText(contact.getCellphone());
+        tiName.setText(contact.getName());
+        tiPhone.setText(contact.getPhone());
+        tiCellphone.setText(contact.getCellphone());
         pvImage.setImageBitmap(contact.getUserImage());
 
         dbsqLiteHelper = new DBSQLiteHelper(this);
@@ -86,9 +88,13 @@ public class EditDeleteActivity extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                contact.setName(tvName.getText().toString());
-                contact.setPhone(tvPhone.getText().toString());
-                contact.setCellphone(tvCellphone.getText().toString());
+
+                String formattedPhone = PhoneNumberUtils.formatNumber(tiPhone.getText().toString(), "BR");
+                String formattedCellphone = PhoneNumberUtils.formatNumber(tiCellphone.getText().toString(), "BR");
+
+                contact.setName(tiName.getText().toString());
+                contact.setPhone(formattedPhone);
+                contact.setCellphone(formattedCellphone);
                 contact.setUserImage(photo);
 
                 dbsqLiteHelper.updateContact(contact);

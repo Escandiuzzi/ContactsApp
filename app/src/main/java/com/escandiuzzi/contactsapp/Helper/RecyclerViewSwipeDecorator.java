@@ -16,6 +16,11 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+/*** CREDITS ***/
+/*** DEVELOPED BY XABARAS ***/
+/*** https://github.com/xabaras/RecyclerViewSwipeDecorator ***/
+
+
 /**
  * A simple utility class to add a background and/or an icon while swiping a RecyclerView item left or right.
  */
